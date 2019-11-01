@@ -1,0 +1,54 @@
+<div class="container m-t-20">
+  <div class="card">
+    <div class="card-body">
+      <ul class="nav nav-tabs" role="tablist tablist1">
+        <li class="nav-item">
+          <a class="nav-link nav-link1 active" data-toggle="tab" href="#balance-enquiry">Balance Enquiry</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link1" data-toggle="tab" href="#cash-withdrawal">Cash Withdrawal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link1" data-toggle="tab" href="#cash-deposit">Cash Deposit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link1" data-toggle="tab" href="#refund">Refund</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link1" data-toggle="tab" href="#transaction-history">Transaction History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link1" data-toggle="tab" href="#help">Help</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div id="balance-enquiry" class="container tab-pane active"><br>
+          <app-balance-enquiry></app-balance-enquiry>
+        </div>
+        <div id="cash-withdrawal" class="container tab-pane fade"><br>
+          <!-- Start Cash Withdrawal -->
+         <app-cash-withdrawal></app-cash-withdrawal>
+          <!-- End Cash Withdrawal -->
+        </div>
+        <div id="cash-deposit" class="container tab-pane fade"><br>
+         <!-- Start Cash Deposit -->
+         <div class="progress">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:60%;height: 20px;"></div>
+        </div>
+         <!-- End Cash Deposit -->
+        </div>
+        <div id="refund" class="container tab-pane fade"><br>
+          <p>cash-deposit</p>
+        </div>
+        <div id="transaction-history" class="container tab-pane fade"><br>
+          <app-transaction-history></app-transaction-history>
+        </div>
+        <div id="help" class="container tab-pane fade"><br>
+          <p>Help</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,304 @@
+<div class="back login-register1">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="m-b-0">Sender Details</h5>
+          </div>
+          <div class="card-body">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#addnew">Add New</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#existing">Existing</a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div id="addnew" class="container tab-pane active"><br>
+                <form>
+                  <div>
+                    <label>Mobile Number</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa fa-mobile"></i>
+                        </span>
+                      </div>
+                      <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                        placeholder="Enter 10 digit Mobile Number" type="text">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>Name</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa fa-user"></i>
+                        </span>
+                      </div>
+                      <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                        placeholder="Enter your Name" type="text">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>Address</label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa fa-address-book-o"></i>
+                        </span>
+                      </div>
+                      <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                        placeholder="Enter Full Address" type="text">
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <input type="button" class="btn btn-info" value="Enroll">
+                  </div>
+                </form>
+              </div>
+              <div id="existing" class="tab-pane fade show"><br>
+                <h3>Existing</h3>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div> <!-- card.// -->
+
+      </div>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="m-b-0">Beneficiary Details</h5>
+          </div>
+          <div class="card-body">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#addnew1">Add New</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#existing1">Existing Recipient</a>
+              </li>
+            </ul>
+
+
+            <div class="tab-content">
+              <div id="addnew1" class="container tab-pane active"><br>
+                <form>
+                  <div>
+                    <label>Select Bank Name <span class="error-txt">*</span></label>
+                    <div class="input-group mb-3 ">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa fa-bank"></i>
+                        </span>
+                      </div>
+                      <select class="form-control selectpicker">
+                        <option>Select Bank</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>Bank Account Number <span class="error-txt">*</span></label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa fa-hashtag"></i>
+                        </span>
+                      </div>
+                      <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                        placeholder="Enter Bank Account Number" type="text">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>Beneficiery Name <span class="error-txt">*</span></label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa fa-user"></i>
+                        </span>
+                      </div>
+                      <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                        placeholder="Enter Beneficiery Name" type="text">
+                    </div>
+                  </div>
+                  <!-- 
+                  <div>
+                    <input type="text" class=" ifsc-search m-r-10" placeholder="search IFSC">
+                  </div> -->
+
+                  <div>
+                    <label>IFSC Code <span class="error-txt">*</span></label>
+                    <input type="text" class=" ifsc-search m-r-10" placeholder="search IFSC">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          <i class="fa fa-mobile"></i>
+                        </span>
+                      </div>
+                      <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                        placeholder="Enter  IFSC Code" type="text">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label>Enter Beneficiary Mobile Number (optional) </label>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                          IFSC
+                        </span>
+                      </div>
+                      <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                        placeholder="Enter Mobile Number" type="text">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 text-center">
+                      <input type="button" class="btn btn-success " value="Verification A/c Detail">
+                      <input type="button" class="btn btn-info m-l-10" value="Proceed to Transfer">
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+              <div id="existing1" class="tab-pane fade show"><br>
+                <h3>Existing</h3>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-header">
+            <button class="btn btn-success">Transfer Money</button>
+            <button class="btn btn-success">Transfer Money</button>
+              <!-- <h5 class="m-b-0">Beneficiary Details</h5> -->
+          </div>
+          <div class="card-body">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#transfer-money">Transfer Money</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#refund-money">Refund Money</a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div id="addnew" class="container tab-pane active"><br>
+                <div>
+                  <p>Max Limit for Month = Rs </p>
+
+
+                  <ul class="nav nav-tabs" role="tablist tablist1">
+                    <li class="nav-item">
+                      <a class="nav-link nav-link1 active" data-toggle="tab" href="#imps">IMPS</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav-link1" data-toggle="tab" href="#neft">NEFT</a>
+                    </li>
+
+                  </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div id="imps" class="container tab-pane active"><br>
+                      <form>
+                        <div>
+                          <label>Enter Amount to Transfer <span class="error-txt">*</span></label>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-hashtag"></i>
+                              </span>
+                            </div>
+                            <input aria-describedby="basic-addon1" aria-label="Username" class="form-control"
+                              placeholder="Minimum amount should be Rs.100" type="text">
+                          </div>
+                        </div>
+
+
+
+                        <div class="col-md-12 text-center">
+                          <input type="button" class="btn btn-success " value="Pay" data-toggle="modal"
+                            data-target="#myModal">
+                        </div>
+                      </form>
+
+                    </div>
+                    <div id="neft" class="container tab-pane fade"><br>
+                      <p>NEFT</p>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+              <div id="existing" class="tab-pane fade show"><br>
+                <h3>Existing</h3>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div> <!-- card.// -->
+
+      </div>
+
+    </div>
+
+
+
+
+
+  </div>
+
+
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-white">Transaction Confirmation</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+      <table class="table  table-bordered">
+        <tr>
+          <td>kdhf</td>
+          <td>bcdgh</td>
+        </tr>
+      </table>
+      </div>
+
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger m-l-10" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

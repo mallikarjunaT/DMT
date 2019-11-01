@@ -1,0 +1,893 @@
+<div class=" login-register1">
+  <div class="container-fluid m-t-10">
+    <div class="row back">
+      <div class=" col-sm-4 m-t-15">
+
+        <div class="card backb">
+          <div class="progress" [hidden]="progressbar" style="height:5px">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:100%;height:5px"></div>
+          </div>
+          <div class="card-header">
+
+            <h5 class="m-b-0 text-white">Sender Details</h5>
+          </div>
+          <div class="card-body">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#addnew" (click)="favoratbtn()">Favourite</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#existing">Login</a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+
+            <div class="tab-content">
+
+              <div id="addnew" class="container tab-pane"><br>
+                <div class="main searchbox">
+                  <div class="form-group has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input type="text" autocomplete="off" [(ngModel)]="search" class="form-control transfer-border"
+                      placeholder="Search Sender">
+                  </div>
+
+                </div>
+
+                <div class="b-list" *ngFor="let obj of sendersList | filter : search">
+                  <div class="row" style="cursor: pointer;" [class.phase-active]="obj===selectedSend">
+
+                    <div class="col-md-7" (click)="selectedSender(obj)">
+                      <strong>{{obj.senderName}}</strong><br>
+                      Ph: {{obj.senderMobileNumber}}
+                    </div>
+
+                    <div class="col-md-2" style="margin-top: 2px; padding: 6px;">
+                      <span class="badge badge-success" style="font-size: 11px;">Verify</span>
+                    </div>
+
+                    <div class="col-md-2 col-md-offset-1" style="margin-top: 9px;" data-toggle="tooltip"
+                      data-placement="bottom" title="Delete Beneficiary">
+                      <a (click)="deleteSender(obj)"><i class="fa fa-trash-o"
+                          style="font-size: 18px; color: #F44336; cursor: pointer;" aria-hidden="true"></i></a>
+                    </div>
+                  </div>
+                </div>
+
+                <br><br>
+              </div>
+
+              <div id="existing" class="tab-pane fade show active"><br>
+                <div [hidden]="loginform">
+                  <form [formGroup]="existsenderForm" (ngSubmit)="loginSubmit(existMobileNumber.value)" novalidate>
+                    <div class="row">
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-mobile"></i>
+                              </span>
+                            </div>
+
+                            <input formControlName="existMobileNumber" #existMobileNumber minlength="10" maxlength="10"
+                              pattern='^[6-9]\d{9}$' (keypress)="numberOnly($event)"
+                              [ngClass]="{'is-invalid': submitted && f.contactF.errors }"
+                              class="floating-input form-control" type="text" placeholder=" ">
+                            <label>Enter 10 digit Mobile Number</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                            *ngIf="existsenderForm.controls.existMobileNumber.dirty && existsenderForm.controls.existMobileNumber.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter Mobile Number
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important; margin-top: -15px !important;"
+                            *ngIf="existsenderForm.controls.existMobileNumber.dirty && existsenderForm.controls.existMobileNumber.errors?.pattern"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter valid Mobile Number
+                          </small>
+
+
+                        </div>
+                      </div>
+                    </div>
+                    <input type="submit" [disabled]="!existsenderForm.valid" style="margin-left: 75px;"
+                      class="btn btn-success " value="Submit" />
+                  </form>
+                </div>
+                <div [hidden]="enrollform">
+                  <form [formGroup]="dmtForm" (ngSubmit)="createSender(senderEnrollmentcontent)" novalidate>
+                    <div class="row">
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-mobile"></i>
+                              </span>
+                            </div>
+                            <input formControlName="MobileNumber" #MobileNumber minlength="10" maxlength="10"
+                              pattern='^[6-9]\d{9}$' (change)="changeNumber()" (keypress)="numberOnly($event)"
+                              (blur)="isExistmobileNumber(MobileNumber.value)"
+                              [ngClass]="{'is-invalid': submitted && f.contactF.errors }"
+                              class="floating-input form-control" type="text" placeholder=" ">
+                            <label>Enter 10 digit Mobile Number</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.MobileNumber.touched && dmtForm.controls.MobileNumber.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter Mobile Number
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.MobileNumber.touched && dmtForm.controls.MobileNumber.errors?.pattern"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter valid format
+                          </small>
+                          <!-- <small [hidden]="exist==true" class="form-text text-muted"
+                              style="color:red !important; margin-top: -7px !important;"><i
+                                class="fa fa-times-circle-o"></i>
+                              Mobile Number Already Exist.
+                            </small> -->
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-user"></i>
+                              </span>
+                            </div>
+
+                            <input formControlName="senderName" minlength="3" maxlength="30" pattern="^[a-zA-Z]+$"
+                              [ngClass]="{'is-invalid': submitted && f.contactF.errors }" (click)="checkfun($event)"
+                              class="floating-input form-control" type="text" placeholder=" " />
+                            <label>Enter your Name</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.senderName.touched && dmtForm.controls.senderName.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Please enter Name
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.senderName.touched && dmtForm.controls.senderName.errors?.minlength"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter Minimum 3 characters
+                          </small>
+                          <small class="form-text text-muted" style="color:red !important;margin-top: -7px !important;"
+                            *ngIf="dmtForm.controls.senderName.touched && dmtForm.controls.senderName.errors?.pattern"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter characters Only
+                          </small>
+
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-address-book-o"></i>
+                              </span>
+                            </div>
+
+                            <!-- <input formControlName="dobDate" (keypress)="numberOnly($event)"
+                              [ngClass]="{'is-invalid': submitted && f.contactF.errors }"
+                              class="floating-input form-control" type="date" placeholder=" "> -->
+
+
+                            <input class="form-control" placeholder="DD-MM-YYYY" name="dp" ngbDatepicker
+                              #d="ngbDatepicker" formControlName="dobDate" dateFormat="dd-MM-yyyy">
+                            <div class="input-group-append">
+                              <button class="btn  calendar" (click)="d.toggle()" type="button"></button>
+                            </div>
+
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; "
+                            *ngIf="dmtForm.controls.dobDate.touched && dmtForm.controls.dobDate.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Please enter Date Of Birth
+                          </small>
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-address-book-o"></i>
+                              </span>
+                            </div>
+                            <input formControlName="address" minlength="5"
+                              [ngClass]="{'is-invalid': submitted && f.contactF.errors }" (click)="address($event)"
+                              class="floating-input form-control" type="text" placeholder=" ">
+                            <label>Enter Address Lane1</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.address.touched && dmtForm.controls.address.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Please enter address
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.address.touched && dmtForm.controls.address.errors?.minlength"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter Minimum 5 characters
+                          </small>
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-mobile"></i>
+                              </span>
+                            </div>
+                            <input formControlName="pincode" #pincode minlength="6" maxlength="6"
+                              (change)="changeNumber()" (keypress)="numberOnly($event)"
+                              [ngClass]="{'is-invalid': submitted && f.contactF.errors }"
+                              class="floating-input form-control" type="text" placeholder=" ">
+                            <label>Enter PinCode</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.pincode.touched && dmtForm.controls.pincode.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Please Enter PinCode
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.pincode.touched && dmtForm.controls.pincode.errors?.minlength"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter valid format
+                          </small>
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-user"></i>
+                              </span>
+                            </div>
+
+                            <input formControlName="city" minlength="3" maxlength="30" pattern="^[a-zA-Z]+$"
+                              [ngClass]="{'is-invalid': submitted && f.contactF.errors }"
+                              class="floating-input form-control" type="text" placeholder=" " />
+                            <label>Enter your city</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.city.touched && dmtForm.controls.city.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Please enter city
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important; margin-top: -15px !important;"
+                            *ngIf="dmtForm.controls.city.touched && dmtForm.controls.city.errors?.minlength"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter Minimum 3 characters
+                          </small>
+                          <small class="form-text text-muted" style="color:red !important;margin-top: -7px !important;"
+                            *ngIf="dmtForm.controls.city.touched && dmtForm.controls.city.errors?.pattern"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter characters Only
+                          </small>
+
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">
+                                <i class="fa fa-bank"></i>
+                              </span>
+                            </div>
+                            <select class="floating-select form-control" formControlName="state"
+                              onclick="this.setAttribute('value', this.value);" value="">
+                              <option *ngFor="let p of statelist" [value]="p.stateName">{{p.stateName}}</option>
+                            </select>
+                            <label>Select State</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important;"
+                            *ngIf="dmtForm.controls.state.touched && dmtForm.controls.state.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Please select state name
+                          </small>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="form-group">
+                      <label for="gender" style="font-size: medium; margin-left: 3px;">*OTP Confirmation Required
+                        ?</label><br>
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio1" style="font-size: 16px; margin-left: 13px;">
+                          <input type="radio" class="form-check-input" name="otpRequired" formControlName="otpRequired"
+                            value=1 required>Yes
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio2" style="font-size: 16px;">
+                          <input type="radio" class="form-check-input" name="otpRequired" formControlName="otpRequired"
+                            value=0 required>No
+                        </label>
+                      </div>
+                      <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                        *ngIf="dmtForm.controls.otpRequired.touched && dmtForm.controls.otpRequired.errors?.required"><i
+                          class="fa fa-times-circle-o"></i>
+                        Please select
+                      </small>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="text-center">
+                          <input type="submit" [disabled]="!dmtForm.valid" class="btn btn-info" value="Enroll">
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div> <!-- card.// -->
+
+      </div>
+      <div class=" col-sm-4 m-t-15">
+        <div class="card backb">
+          <div class="progress" [hidden]="benficiary_Progressbar" style="height:5px">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:100%;height:5px"></div>
+          </div>
+          <div class="card-header">
+            <h5 class="m-b-0 text-white">Beneficiary Details</h5>
+          </div>
+          <div class="card-body">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active': isActive}" (click)="AddnewBeniForm()" data-toggle="tab"
+                  href="#addnew1">Add
+                  New</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [ngClass]="{'active': !isActive}" (click)="enableexist()" data-toggle="tab"
+                  href="#existing1">Existing</a>
+              </li>
+            </ul>
+
+            <div [hidden]="beneficiaryform">
+              <div class="tab-content">
+                <div id="addnew1" class="container tab-pane active"><br>
+                  <form [formGroup]="benForm" (ngSubmit)="createBeneficiary(newbeneficiarycontent)" novalidate>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="floating-form">
+                          <div class="floating-label">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fa fa-bank"></i>
+                                </span>
+                              </div>
+                              <select class="floating-select form-control" formControlName="bankName"
+                                onclick="this.setAttribute('value', this.value);" value="">
+                                <option *ngFor="let p of banklist" [value]="p.bankName">{{p.bankName}}</option>
+                              </select>
+                              <label>Select Bank</label>
+                            </div>
+                            <small class="form-text text-muted" style="color:red!important;"
+                              *ngIf="benForm.controls.bankName.touched && benForm.controls.bankName.errors?.required"><i
+                                class="fa fa-times-circle-o"></i>
+                              Please select bank Name
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-hashtag"></i>
+                              </span>
+                            </div>
+                            <input formControlName="accountNumber" minlength="6" maxlength="16" (click)="firstcheckfn()"
+                              (keypress)="numberOnly($event)" aria-describedby="basic-addon1" aria-label="Username"
+                              placeholder="Enter Bank Account Number" class="floating-input form-control" type="text"
+                              placeholder=" ">
+                            <label>Enter Bank Account Number</label>
+                          </div>
+                          <small class="form-text text-muted"
+                            style="color:red!important;  margin-top: -15px !important;"
+                            *ngIf="benForm.controls.accountNumber.touched && benForm.controls.accountNumber.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter valid Account Number
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important;  margin-top: -15px !important;"
+                            *ngIf="benForm.controls.accountNumber.touched && benForm.controls.accountNumber.errors?.minlength"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter valid Bank Account Number
+                          </small>
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-user"></i>
+                              </span>
+                            </div>
+                            <input formControlName="beneficiaryName" pattern="^[a-zA-Z ]+$" aria-label="Username"
+                              (click)="secondcheckfn()" maxlength="30" minlength="3" class="form-control"
+                              placeholder="Enter Beneficiery Name" class="floating-input form-control" type="text"
+                              placeholder=" ">
+                            <label>Enter Beneficiery Name</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                            *ngIf="benForm.controls.beneficiaryName.touched && benForm.controls.beneficiaryName.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter Beneficiery Name
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important; margin-top: -15px !important;"
+                            *ngIf="benForm.controls.beneficiaryName.touched && benForm.controls.beneficiaryName.errors?.minlength"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter Minimum 3 characters
+                          </small>
+                          <small class="form-text text-muted" style="color:red !important;margin-top: -7px !important;"
+                            *ngIf="benForm.controls.beneficiaryName.touched && benForm.controls.beneficiaryName.errors?.pattern"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter characters Only
+                          </small>
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-id-card-o"></i>
+                              </span>
+                            </div>
+                            <input formControlName="ifscCode" (click)="thirdcheckfn()" (keypress)="ifsc($event)"
+                              maxlength="11" (keydown.space)="$event.preventDefault();"
+                              pattern="^[A-Z]{4}[0][A-Z0-9]{6}$" placeholder="Enter  IFSC Code"
+                              class="floating-input form-control" type="text" placeholder=" ">
+                            <label>Enter IFSC Code</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important;margin-top: -15px !important;"
+                            *ngIf="benForm.controls.ifscCode.touched && benForm.controls.ifscCode.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter Ifsc code
+                          </small>
+                          <small class="form-text text-muted" style="color:red!important;"
+                            *ngIf="benForm.controls.ifscCode.touched && benForm.controls.ifscCode.errors?.pattern"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter valid Ifsc code
+                          </small>
+                        </div>
+                      </div>
+                      <div class="col-md-12 floating-form">
+                        <div class="floating-label">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">
+                                <i class="fa fa-mobile"></i>
+                              </span>
+                            </div>
+                            <input formControlName="beneficiaryMobileNumber" minlength="10" maxlength="10"
+                              pattern='^[6-9]\d{9}$' (keypress)="numberOnly($event)" aria-label="Username"
+                              placeholder="Enter Mobile Number" class="floating-input form-control" type="text"
+                              placeholder=" ">
+                            <label>Enter Beneficiary Mobile No.</label>
+                          </div>
+                          <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                            *ngIf="benForm.controls.beneficiaryMobileNumber.touched && benForm.controls.beneficiaryMobileNumber.errors?.required"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter valid Mobile Number
+                          </small>
+                          <small class="form-text text-muted"
+                            style="color:red !important; margin-top: -15px !important;"
+                            *ngIf="benForm.controls.beneficiaryMobileNumber.touched && benForm.controls.beneficiaryMobileNumber.errors?.pattern"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter valid format
+                          </small>
+                          <small class="form-text text-muted" style="color:red !important; margin-top: -7px !important;"
+                            *ngIf="benForm.controls.beneficiaryMobileNumber.touched && benForm.controls.beneficiaryMobileNumber.errors?.minlength"><i
+                              class="fa fa-times-circle-o"></i>
+                            Enter 10 Digit Mobile Number
+                          </small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="gender" style="font-size: medium; margin-left: 16px;">*OTP Confirmation Required
+                          ?</label><br>
+                        <div class="form-check-inline">
+                          <label class="form-check-label" for="radio1" style="font-size: 16px; margin-left: 24px;">
+                            <input type="radio" class="form-check-input" name="beneficiaryOtpRequired"
+                              formControlName="beneficiaryOtpRequired" value=1 required>Yes
+                          </label>
+                        </div>
+                        <div class="form-check-inline">
+                          <label class="form-check-label" for="radio2" style="font-size: 16px;">
+                            <input type="radio" class="form-check-input" name="beneficiaryOtpRequired"
+                              formControlName="beneficiaryOtpRequired" value=0 required>No
+                          </label>
+                        </div>
+                        <small class="form-text text-muted" style="color:red!important; margin-top: -15px !important;"
+                          *ngIf="benForm.controls.beneficiaryOtpRequired.touched && benForm.controls.beneficiaryOtpRequired.errors?.required"><i
+                            class="fa fa-times-circle-o"></i>
+                          Please select
+                        </small>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 text-center">
+                        <input type="button" class="btn btn-success " value="Verify A/c Detail">
+                      </div>
+                      <div class="col-md-6 text-center">
+                        <input type="submit" class="btn btn-info" [disabled]="!benForm.valid"
+                          value="Proceed to Transfer">
+                      </div>
+
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+            <div [hidden]="existingben">
+              <div id="existing1" class="tab-pane fade show active"><br>
+                <!-- <h3>Existing</h3> -->
+                <div *ngIf="errorMessage" class="myerror">
+                  <a href="#" class="alert-link">{{errorMessage}}</a>.
+                </div>
+                <div *ngIf="deleteBeneficiaryMessage" class="myerror">
+                  <a href="#" class="alert-link">{{deleteBeneficiaryMessage}}</a>.
+                </div>
+                <div [hidden]="beficiaryList">
+                  <div class="main searchbox">
+
+                    <!-- Actual search box -->
+                    <div class="form-group has-search">
+                      <span class="fa fa-search form-control-feedback"></span>
+                      <input type="text" autocomplete="off" [(ngModel)]="searchBenficiary"
+                        class="form-control transfer-border" placeholder="Search Beneficiary">
+                    </div>
+
+                  </div>
+                  <!-- Beneficiary List-->
+                  <div class="b-list" *ngFor="let obj of jsonList | filter : searchBenficiary">
+                    <div class="row" style="cursor: pointer;" [class.phase-active]="obj===selectedHero">
+
+                      <div class="col-md-7" (click)="selectedBeneficiary(obj)">
+                        <strong>{{obj.beneficiaryName}}</strong><br>
+                        A/c {{obj.accountNo}}
+                      </div>
+
+                      <div class="col-md-2" style="margin-top: 2px; padding: 6px;">
+                        <span class="badge badge-success" style="font-size: 11px;">Verify</span>
+                      </div>
+
+                      <div class="col-md-2 col-md-offset-1" style="margin-top: 9px;" data-toggle="tooltip"
+                        data-placement="bottom" title="Delete Beneficiary">
+                        <a class="" (click)="deleteBeneficiary(obj,deleteBeneficiarycontent)"><i class="fa fa-trash-o removeicon"
+                            aria-hidden="true"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class=" col-sm-4 m-t-15">
+        <div class="card backb">
+          <div class="progress" [hidden]="amountTransfer_Progressbar" style="height:5px">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:100%;height:5px"></div>
+          </div>
+          <div class="card-header ">
+            <h5 class="m-b-0 text-white">Transactions Details</h5>
+          </div>
+          <div class="card-body">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#transfer-money">Transfer Money</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#refund-money">Refund Money</a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div id="transfer-money" class="container tab-pane active">
+                <p class="monthly-transfer">Monthly Transfer Limit left: <span class="mtl"> <i
+                      class="fa fa-rupee f-12"></i><strong> {{senderLimit}}</strong></span></p>
+                <form [formGroup]="moneyTransFerForm" (ngSubmit)="sendMoney(Amount.value)" novalidate>
+                  <div class="row m-l--30">
+                    <div class="col-md-12">
+                      <label class="f-16">Select Mode of Transfer: </label>
+                      <select class="form-control m-l-10 transfer-border" style="width:30%">
+                        <option *ngFor="let p of bankTransfermode" [value]="p.mode">{{p.mode}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row m-l--30 m-t-10">
+                    <div class="col-md-12">
+                      <label class="f-16">Enter Amount to Transfer: </label>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">
+                            <i class="fa fa-rupee"></i>
+                          </span>
+                        </div>
+
+                        <input formControlName="Amount" #Amount minlength="3" maxlength="5"
+                          (keypress)="numberOnly($event)" aria-label="Username" class="floating-input form-control"
+                          type="text" placeholder="">
+
+                      </div>
+                      <small class="form-text text-muted" style="color:red!important;"
+                        *ngIf="moneyTransFerForm.controls.Amount.touched && moneyTransFerForm.controls.Amount.errors?.required"><i
+                          class="fa fa-times-circle-o"></i>
+                        Enter Amount
+                      </small>
+                      <small class="form-text text-muted" style="color:red !important;"
+                        *ngIf="moneyTransFerForm.controls.Amount.touched && moneyTransFerForm.controls.Amount.errors?.minlength"><i
+                          class="fa fa-times-circle-o"></i>
+                        Enter 3 digit amount
+                      </small>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button type="submit" [disabled]="!moneyTransFerForm.valid" style="margin-left: 75px;"
+                        class="btn btn-success">Pay</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div id="refund-money" class="tab-pane fade show"><br>
+                <h3>Existing</h3>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div> <!-- card.// -->
+
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+<!-- 
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-white">Sender Enrollment - OTP Confirmation</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        OTP has been sent successfully to ******{{last4Digits}}<br><br>
+        <table class="table  table-bordered">
+          <tr>
+            <td><strong>OTP</strong></td>
+            <td><input class="floating-input form-control" #senderOTP maxlength="6" type="text"
+                placeholder=" Enter OTP"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" (click)="otpsubmit(senderOTP)" class="btn btn-danger m-l-10"
+          data-dismiss="modal">Submit</button>
+      </div>
+
+    </div>
+  </div> -->
+
+<!-- 
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+   
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div> -->
+
+
+<!-- <div class="modal fade" style=" margin-top: 124px;" id="myModaldeleteconfirm">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-white">Delete Beneficiary - OTP Confirmation</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        OTP has been sent successfully to ******{{last4DigitsfordeleteBen}}<br><br>
+        <table class="table  table-bordered">
+          <tr>
+            <td><strong>OTP</strong></td>
+            <td><input class="floating-input form-control" #deleteBenficiaryOTP maxlength="6" type="text"
+                placeholder=" Enter OTP"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" (click)="deleteBeneficiary(deleteBenficiaryOTP.value)" class="btn btn-danger m-l-10"
+          data-dismiss="modal">Submit</button>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<!-- <div #myModalnewBeneficiary class="modal fade" style=" margin-top: 124px;" id="myModal_newBeneficiary">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-white">New Beneficiary - OTP Confirmation</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        OTP has been sent successfully to ******{{last4Digits1}}<br><br>
+        <table class="table  table-bordered">
+          <tr>
+            <td><strong>OTP</strong></td>
+            <td><input class="floating-input form-control" #otpconfirm maxlength="6" type="text"
+                placeholder=" Enter OTP"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="modal-footer text-center">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" (click)="beneficiaryOtpConfirm(otpconfirm)" class="btn btn-danger m-l-10"
+          data-dismiss="modal">Submit</button>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<div class="col-md-6">
+  <div class="card">
+    <div class="card-body">
+      <ng-template #senderEnrollmentcontent let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" style="color: white;">Sender Enrollment - OTP Confirmation</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          OTP has been sent successfully to ******{{last4Digits}}<br><br>
+          <table class="table  table-bordered">
+            <tr>
+              <td><strong>OTP</strong></td>
+              <td><input class="floating-input form-control" #senderOTP maxlength="6" type="text"
+                  placeholder=" Enter OTP"></td>
+
+            </tr>
+
+
+          </table>
+          <span>OTP Expired with in: {{timeLeft}} Seconds.</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="CloseButton" (click)="c('Close click')">Close</button>
+          <button type="submit" (click)="otpsubmit(senderOTP)" (click)="c('Close click')" class="btn btn-danger m-l-10"
+            data-dismiss="modal">Submit</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-6">
+  <div class="card">
+    <div class="card-body">
+      <ng-template #newbeneficiarycontent let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" style="color: white;">New Beneficiary - OTP Confirmation</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          OTP has been sent successfully to ******{{last4DigitsfornewBen}}<br><br>
+          <table class="table  table-bordered">
+            <tr>
+              <td><strong>OTP</strong></td>
+              <td><input class="floating-input form-control" #otpconfirm maxlength="6" type="text"
+                  placeholder=" Enter OTP"></td>
+
+            </tr>
+          </table>
+          <span>
+            OTP Expired with in: {{bentimeLeft}} Seconds.
+          </span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="CloseButton1" (click)="c('Close click')">Close</button>
+          <button type="submit" (click)="beneficiaryOtpConfirm(otpconfirm)" (click)="c('Close click')"
+            class="btn btn-danger m-l-10" data-dismiss="modal">Submit</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <div class="card">
+    <div class="card-body">
+      <ng-template #deleteBeneficiarycontent let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" style="color: white;">Delete Beneficiary - OTP Confirmation</h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          OTP has been sent successfully to ******{{last4DigitsfordeleteBen}}<br><br>
+          <table class="table  table-bordered">
+            <tr>
+              <td><strong>OTP</strong></td>
+              <td><input class="floating-input form-control" #deleteBenficiaryOTP maxlength="6" type="text"
+                  placeholder=" Enter OTP"></td>
+
+            </tr>
+
+          </table>
+          <span>
+            OTP Expired with in: {{bendeletetimeLeft}} Seconds.
+          </span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="CloseButton2" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+          <button type="submit" (click)="deletebeneficiaryOtpConfirmservice(deleteBenficiaryOTP.value)" (click)="c('Close click')"
+            class="btn btn-danger m-l-10" data-dismiss="modal">Submit</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

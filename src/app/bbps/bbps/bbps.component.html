@@ -1,0 +1,76 @@
+<div class="container m-t-20">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#electricity" role="tab"
+                aria-controls="home" aria-selected="true">Electricity</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#mobilepostpaid" role="tab"
+                aria-controls="contact" aria-selected="false">Mobile Postpaid</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#dth" role="tab" aria-controls="contact"
+                aria-selected="false">DTH</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#broadband" role="tab"
+                aria-controls="contact" aria-selected="false">Broadband</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#landline" role="tab" aria-controls="contact"
+                aria-selected="false">Landline</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#water" role="tab" aria-controls="contact"
+                aria-selected="false">Water</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#gas" role="tab" aria-controls="contact"
+                aria-selected="false">Gas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#complaintmanagement" role="tab"
+                aria-controls="contact" aria-selected="false">Complaint Management</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.col-md-4 -->
+        <div class="col-md-9">
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="electricity" role="tabpanel" aria-labelledby="home-tab">
+              <app-electricity> </app-electricity>
+            </div>
+            <div class="tab-pane fade" id="mobilepostpaid" role="tabpanel" aria-labelledby="profile-tab">
+              <app-mobilepostpaid></app-mobilepostpaid>
+            </div>
+            <div class="tab-pane fade" id="dth" role="tabpanel" aria-labelledby="contact-tab">
+              <app-dth></app-dth>
+
+            </div>
+            <div class="tab-pane fade" id="broadband" role="tabpanel" aria-labelledby="contact-tab">
+              <app-broadband></app-broadband>
+            </div>
+            <div class="tab-pane fade" id="landline" role="tabpanel" aria-labelledby="contact-tab">
+              <app-landline></app-landline>
+
+            </div>
+            <div class="tab-pane fade" id="water" role="tabpanel" aria-labelledby="contact-tab">
+              <app-water></app-water>
+            </div>
+            <div class="tab-pane fade" id="gas" role="tabpanel" aria-labelledby="contact-tab">
+            <app-gas></app-gas>
+            </div>
+            <div class="tab-pane fade" id="complaintmanagement" role="tabpanel" aria-labelledby="contact-tab">
+              <app-complaint-management></app-complaint-management>
+            </div>
+          </div>
+        </div>
+        <!-- /.col-md-8 -->
+      </div>
+    </div>
+  </div>
+</div>

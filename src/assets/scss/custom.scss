@@ -1,0 +1,136 @@
+// Fonts
+@font-face {
+  font-family: roboto;
+  src: url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap);
+  unicode-range: U+30-39;
+}
+body{
+  font-family: roboto;
+  font-weight: 400;
+}
+// .roboto-medium{
+//   font-family: roboto;
+//   font-weight: 500;
+// }
+// .roboto-bold{
+//   font-family: roboto;
+//   font-weight: 700;
+// }
+// .roboto-black{
+//   font-family: roboto;
+//   font-weight: 900;
+// }
+
+.error-txt{color: #dc3545;}
+.form-control {
+    padding: 0.2rem 0.75rem;
+    font-size: 13px;
+    line-height: 1;
+    min-height: 38px;
+    border-radius: 0px 5px 5px 0px !important;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+.error-txt{color:#9b0101;margin-top: -15px }
+
+form label {
+    font-size: 14px;
+}
+.text-white{color:#fff;}
+// input-icon-width
+.input-group-text {
+    font-size: 13px;
+    color:#666;
+    min-width:42px;
+    max-width:42px;
+  }
+  .form-control:focus {
+    color: #495057;
+    background-color: #ffffff;
+    border: 1px solid #03a9f3;
+    outline: 0;
+    box-shadow: 0 0 0 0rem rgba(116, 96, 238, 0.25);
+}
+
+/****  floating-Lable style start ****/
+.floating-form  .floating-label { 
+    position:relative; 
+    margin-bottom:20px;
+    // margin-top:10px; 
+  }
+  .floating-form  .floating-input:focus ~ label, .floating-input:not(:placeholder-shown) ~ label {
+    top:-18px;    
+    font-size:11px;
+    font-weight: 500px;
+    left:5px;
+    color:#333;
+    font-family: roboto;
+  }
+  .floating-select:focus ~ label , .floating-select:not([value=""]):valid ~ label {
+    top:-18px;
+    font-size:11px;
+    left:5px;
+    color:#333;
+    
+  }
+  .floating-form label {
+    color:#999; 
+    
+    font-size:13px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:55px;
+    top:8px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+
+  ::placeholder {
+    color: #999 !important;
+    opacity: 1;
+  }
+  :-ms-input-placeholder {
+    color: #999 !important;
+  }
+  
+  ::-ms-input-placeholder {
+    color: #999 !important;
+  }
+  
+.nav-tabs .nav-link{color:#fff;text-align: center}
+span i {font-size:18px!important;}
+span .fa-mobile {font-size:24px!important;}
+.m-t--10{margin-top:-10px}
+
+// tab
+.tab-pane{
+  border-right: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 5px;
+  // padding: 10px;
+}
+
+// aeps
+.border{border: 1px solid #666;padding: 12px;}
+.form-check-label{font-size: 11px;}
+
+.f-12{font-size: 12px;}
+
+// Transaction History
+.table-responsive thead{font-size: 14px;}
+.table-responsive tbody{font-size: 12px;}
+.table-responsive thead th,.table-responsive tbody{text-align: center}
+
+.w-150{width:150px;}
+.w-200{width: 200px;}
+.w-250{width:250px;}
+.w-300{width: 300px;}
+
+
+// .btn{font-size: 12px;  min-width: 140px;}
+.tab-content{background: #efeddd;min-height: 460px;}
+.nav-tabs .nav-link{background: #efeddd;color: #000; border: 1px solid #bfd0bd;}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link { background-color: #7a9178;color:#fff}
+.bg1{background: #efeddd}
